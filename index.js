@@ -199,16 +199,21 @@ function addEmployee() {
 }
 
 function updateRole() {
+  connection.query("SELECT * FROM employee", function (err, res) {
+    const employeeArray = res.map((employee) => ({ name: employee.first_name + " " + employee.last_name, value: employee.id}));
+  connection.query("SELECT * FROM role", function (err, res) {
+    const roleArray = res.map((role) => ({ name: role.title, value: role.id}));
+  
     inquirer
     .prompt([
       {
-        type: "input",
-        message: "What is the id of the employee you would like to update?",
+        type: "list",
+        message: "What is the name of the employee you would like to update?",
         name: "id",
       },
       {
-        type: "input",
-        message: "What is the new role id of this employee?",
+        type: "list",
+        message: "What is the new role of this employee?",
         name: "role_id",
       },
     ])
@@ -219,6 +224,8 @@ function updateRole() {
             anyThingElse();
         });
     });
+});
+});
 }
 
 start();
