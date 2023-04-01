@@ -210,11 +210,13 @@ function updateRole() {
         type: "list",
         message: "What is the name of the employee you would like to update?",
         name: "id",
+        choices: employeeArray,
       },
       {
         type: "list",
         message: "What is the new role of this employee?",
         name: "role_id",
+        choices: roleArray,
       },
     ])
     .then((response) => {
